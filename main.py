@@ -23,13 +23,13 @@ class Main():
       navbar = customtkinter.CTkFrame(window)
       navbar.pack(fill=customtkinter.X)
 
-      StudentsButton = customtkinter.CTkButton(
+      HomeButton = customtkinter.CTkButton(
         navbar,
         corner_radius = 0,
         command = lambda: self.showPage("Home"),
         text = "Home"
       )
-      StudentsButton.pack(side=customtkinter.LEFT)
+      HomeButton.pack(side=customtkinter.LEFT)
 
     except Exception as e:
       ExceptionType, ExceptionObject, ExceptionTraceBack = sys.exc_info()
