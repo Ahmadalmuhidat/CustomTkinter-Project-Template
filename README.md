@@ -14,7 +14,7 @@ This is a CustomTkinter project template that can be used as a starting point fo
 │   │   └── dummy_controller.py # Example controller
 │   ├── core/                   # Core functionality and business logic
 │   │   └── dummy_core_class.py # Example core class
-│   ├── heler/                  # Contains reusable pieces of code.
+│   ├── helper/                  # Contains reusable pieces of code.
 │   ├── interfaces/             # Interfaces and abstract classes (useful for design patterns)
 │   │   └── dummy_interface.py  # Example interface
 │   └── views/                  # UI components / pages of the application
