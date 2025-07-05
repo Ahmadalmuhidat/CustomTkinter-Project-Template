@@ -1,10 +1,30 @@
-# CustomTkinter Project Template
 This is a CustomTkinter project template that can be used as a starting point for your projects. CustomTkinter is a powerful library that extends Tkinter with modern UI components, making it easier to build aesthetically pleasing desktop applications.
 
 ## Features
 - Modern UI components
 - Customizable themes
 - Easy-to-use layout management
+
+## Folder Structure
+```bash
+.
+├── app/                        # Main application package
+│   ├── config/                 # Configuration files (e.g., theme settings, constants)
+│   ├── controller/             # Controllers handle the logic between views and core
+│   │   └── dummy_controller.py # Example controller
+│   ├── core/                   # Core functionality and business logic
+│   │   └── dummy_core_class.py # Example core class
+│   ├── heler/                  # Contains reusable pieces of code.
+│   ├── interfaces/             # Interfaces and abstract classes (useful for design patterns)
+│   │   └── dummy_interface.py  # Example interface
+│   └── views/                  # UI components / pages of the application
+│       ├── home.py             # Home page view
+│       └── second_page.py      # Another example page view
+├── env/                        # (Optional) Virtual environment directory
+├── .gitignore                  # Git ignored files
+├── main.py                     # Application entry point
+└── README.md                   # Project documentation
+```
 
 ## Getting Started
 1. **Install Dependencies**: Ensure you have `customtkinter` installed. You can install it using pip:

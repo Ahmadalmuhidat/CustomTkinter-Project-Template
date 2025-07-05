@@ -24,7 +24,7 @@ class Home():
       print(ExceptionType, FileName, ExceptionTraceBack.tb_lineno)
       print(ExceptionObject)
 
-  def create(self, parent):
+  def lunch_view(self, parent):
     try:
       SearchBarFrame = customtkinter.CTkFrame(
         parent,

@@ -1,16 +1,19 @@
 import os
 import sys
 import customtkinter
+import app.views.home as Home
+import app.views.second_page as Second_Page
 
-import pages.Home.Home as Home
+from app.config.configrations import Configrations
+from app.config.router import Router
+
+customtkinter.set_appearance_mode("dark")
 
 class Main():
   def __init__(self):
     try:
-      super().__init__()
-
-      self.CurrentPage = None
-      self.pages = {}
+      self._config = Configrations()
+      self._router = Router()
 
     except Exception as e:
       ExceptionType, ExceptionObject, ExceptionTraceBack = sys.exc_info()
@@ -18,35 +21,26 @@ class Main():
       print(ExceptionType, FileName, ExceptionTraceBack.tb_lineno)
       print(ExceptionObject)
 
-  def Navbar(self, window):
+  def create_navbar(self):
     try:
-      navbar = customtkinter.CTkFrame(window)
+      navbar = customtkinter.CTkFrame(self._config.window)
       navbar.pack(fill=customtkinter.X)
 
-      HomeButton = customtkinter.CTkButton(
+      home = customtkinter.CTkButton(
         navbar,
         corner_radius = 0,
-        command = lambda: self.showPage("Home"),
+        command = lambda: self._router.navigate(Home.Home),
         text = "Home"
       )
-      HomeButton.pack(side=customtkinter.LEFT)
+      home.pack(side=customtkinter.LEFT)
 
-    except Exception as e:
-      ExceptionType, ExceptionObject, ExceptionTraceBack = sys.exc_info()
-      FileName = os.path.split(ExceptionTraceBack.tb_frame.f_code.co_filename)[1]
-      print(ExceptionType, FileName, ExceptionTraceBack.tb_lineno)
-      print(ExceptionObject)
-
-  def showPage(self, name):
-    try:
-      if self.CurrentPage:
-        self.CurrentPage.pack_forget()
-
-      self.CurrentPage = self.pages[name]
-      self.CurrentPage.pack(
-        fill = customtkinter.BOTH,
-        expand = True
+      second_page = customtkinter.CTkButton(
+        navbar,
+        corner_radius = 0,
+        command = lambda: self._router.navigate(Second_Page.Second_Page),
+        text = "Second Page"
       )
+      second_page.pack(side=customtkinter.LEFT)
 
     except Exception as e:
       ExceptionType, ExceptionObject, ExceptionTraceBack = sys.exc_info()
@@ -54,37 +48,18 @@ class Main():
       print(ExceptionType, FileName, ExceptionTraceBack.tb_lineno)
       print(ExceptionObject)
 
-  def createPage(self, window, name):
+  def start_program(self):
     try:
-      page = customtkinter.CTkFrame(window)
-      self.pages[name] = page
-
-      if name == "Home":
-        Home.Home().create(page)
-
-    except Exception as e:
-      ExceptionType, ExceptionObject, ExceptionTraceBack = sys.exc_info()
-      FileName = os.path.split(ExceptionTraceBack.tb_frame.f_code.co_filename)[1]
-      print(ExceptionType, FileName, ExceptionTraceBack.tb_lineno)
-      print(ExceptionObject)
-
-  def startTheProgram(self):
-    try:
-      customtkinter.set_appearance_mode("dark")
-
       self.window = customtkinter.CTk()
+      self._config.set_window(self.window)
 
       width= self.window.winfo_screenwidth()
       height= self.window.winfo_screenheight()
       self.window.geometry("%dx%d" % (width, height))
-
       self.window.title("CustomTkinter Template")
 
-      self.Navbar(self.window)
-
-      self.createPage(self.window, "Home")
-
-      self.showPage("Home")
+      self.create_navbar()
+      self._router.navigate(Home.Home)
 
       self.window.mainloop()
 
@@ -97,4 +72,4 @@ class Main():
       pass
 
 if __name__ == "__main__":
-  Main().startTheProgram()
+  Main().start_program()
