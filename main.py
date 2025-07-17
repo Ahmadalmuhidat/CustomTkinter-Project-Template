@@ -48,6 +48,17 @@ class Main():
       print(ExceptionType, FileName, ExceptionTraceBack.tb_lineno)
       print(ExceptionObject)
 
+  def when_app_close(self):
+    try:
+      self.window.destroy()
+      sys.exit(0)
+
+    except Exception as e:
+      ExceptionType, ExceptionObject, ExceptionTraceBack = sys.exc_info()
+      fname = os.path.split(ExceptionTraceBack.tb_frame.f_code.co_filename)[1]
+      print(ExceptionType, fname, ExceptionTraceBack.tb_lineno)
+      print(ExceptionObject)
+
   def start_program(self):
     try:
       self.window = customtkinter.CTk()
@@ -57,6 +68,10 @@ class Main():
       height= self.window.winfo_screenheight()
       self.window.geometry("%dx%d" % (width, height))
       self.window.title("CustomTkinter Template")
+      self.window.protocol(
+        "WM_DELETE_WINDOW",
+        self.when_app_close
+      )
 
       self.create_navbar()
       self._router.navigate(Home.Home)
